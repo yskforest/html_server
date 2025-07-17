@@ -10,8 +10,7 @@ cp .env.example .env
 # Edit .env to set your SERVER_NAME and HTTPS_PORT
 
 # 2. Generate a self-signed certificate
-chmod +x generate-cert.sh
-./generate-cert.sh localhost # or your actual server name
+sh generate-cert.sh localhost # or your actual server name
 
 # 3. Start the containers
 docker compose up -d
