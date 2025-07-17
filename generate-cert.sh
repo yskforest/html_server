@@ -17,8 +17,8 @@ fi
 
 HOSTNAME=$1
 SSL_DIR="nginx/ssl"
-KEY_FILE="${SSL_DIR}/server.key"
-CERT_FILE="${SSL_DIR}/server.crt"
+KEY_FILE="${SSL_DIR}/${HOSTNAME}.key"
+CERT_FILE="${SSL_DIR}/${HOSTNAME}.crt"
 
 mkdir -p "$SSL_DIR"
 

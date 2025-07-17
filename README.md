@@ -1,10 +1,28 @@
 # HTTPS Server with Nginx and Docker Compose
 
+This is a template project for serving HTML content over HTTPS using Nginx and Docker Compose.
+
 ## セットアップ手順
 
-### 1. 自己署名証明書の作成
+### 1. 環境設定
 
-まず、証明書を生成するためのスクリプトに実行権限を付与します。
+`.env.example` ファイルをコピーして `.env` ファイルを作成します。
+
+```bash
+cp .env.example .env
+```
+
+次に、`.env` ファイルを開き、あなたの環境に合わせて `SERVER_NAME` と `HTTPS_PORT` を編集します。
+
+```ini
+# .env
+SERVER_NAME=192.168.0.1 # or localhost, dev.example.com etc.
+HTTPS_PORT=8443
+```
+
+### 2. 自己署名証明書の作成
+
+まず、証明書生成スクリプトに実行権限を付与します。
 
 ```bash
 chmod +x generate-cert.sh
