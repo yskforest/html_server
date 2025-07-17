@@ -10,7 +10,7 @@ services:
       # 設定テンプレートをマウント
       - ./nginx/conf.d/default.conf.template:/etc/nginx/templates/default.conf.template
       - ./nginx/ssl:/etc/ssl
-      - ./html:/usr/share/nginx/html
+      - ./html:/usr/share/nginx/html:ro
     # コンテナに環境変数を渡す
     env_file:
       - .env
