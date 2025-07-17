@@ -1,10 +1,18 @@
 services:
   nginx:
     image: nginx:latest
+    # .env ファイルからポート番号を読み込む
+    # HTTP_PORTが .env ファイルにない、または空の場合、そのポートは公開されない
     ports:
-      # - 80:80
-      - 8443:443
+      - "${HTTP_PORT}:80"
+      - "${HTTPS_PORT}:443"
     volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
+      # 設定テンプレートをマウント
+      - ./nginx/conf.d/default.conf.template:/etc/nginx/templates/default.conf.template
       - ./nginx/ssl:/etc/ssl
       - ./html:/usr/share/nginx/html
+    # コンテナに環境変数を渡す
+    env_file:
+      - .env
+    # コンテナ起動時に環境変数を埋め込んでNginxの設定ファイルを生成する
+    command: /bin/sh -c "envsubst '$$SERVER_NAME' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
